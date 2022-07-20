@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AB_GET_LIST } from "./config/ajax-path";
+import { Link, useLocation } from "react-router-dom";
 
 // componentDidMount
 // componentDidUpdate
@@ -7,22 +8,27 @@ import { AB_GET_LIST } from "./config/ajax-path";
 
 export default function App() {
     const [data, setData] = useState({});
+    const location = useLocation();
+    const usp = new URLSearchParams(location.search);
+    // usp.get('page')
+
+    console.log(location);
 
     const getPageData = async (event, gotoPage) => {
-      if(event){
-        event.preventDefault();
-      }
-      console.log({gotoPage});
+        if (event) {
+            event.preventDefault();
+        }
+        console.log({ gotoPage });
 
-      const r = await fetch(`${AB_GET_LIST}?page=${gotoPage}`);
-      const obj = await r.json();
-      console.log(obj);
-      setData(obj);
+        const r = await fetch(`${AB_GET_LIST}?page=${gotoPage}`);
+        const obj = await r.json();
+        console.log(obj);
+        setData(obj);
     };
 
     useEffect(() => {
-      getPageData(null, 1);
-    }, []);
+        getPageData(null, +usp.get('page') || 1);
+    }, [location]);
 
     return (
         <div>
@@ -39,10 +45,21 @@ export default function App() {
                             .map((v, i) =>
                                 data.page + i - 5 >= 1 &&
                                 data.page + i - 5 <= data.totalPages ? (
-                                    <li className={['page-item', data.page===(data.page + i - 5) ? 'active' : null].join(' ')} key={"pagi" + (+data.page + i - 5)}>
-                                        <a className="page-link" href="#/" onClick={(event)=>getPageData(event, data.page + i - 5)}>
+                                    <li
+                                        className={[
+                                            "page-item",
+                                            data.page === data.page + i - 5
+                                                ? "active"
+                                                : null,
+                                        ].join(" ")}
+                                        key={"pagi" + (+data.page + i - 5)}
+                                    >
+                                        <Link
+                                            className="page-link"
+                                            to={`?page=${data.page + i - 5}`}
+                                        >
                                             {data.page + i - 5}
-                                        </a>
+                                        </Link>
                                     </li>
                                 ) : null
                             )}
