@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AB_GET_LIST } from "./config/ajax-path";
 import { Link, useLocation } from "react-router-dom";
+import Pagination from "./components/pagination";
 
 // componentDidMount
 // componentDidUpdate
@@ -33,44 +34,7 @@ export default function App() {
     return (
         <div>
             {data && data.totalPages ? (
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination">
-                        <li className="page-item">
-                            <a className="page-link" href="#/">
-                                Previous
-                            </a>
-                        </li>
-                        {Array(11)
-                            .fill(1)
-                            .map((v, i) =>
-                                data.page + i - 5 >= 1 &&
-                                data.page + i - 5 <= data.totalPages ? (
-                                    <li
-                                        className={[
-                                            "page-item",
-                                            data.page === data.page + i - 5
-                                                ? "active"
-                                                : null,
-                                        ].join(" ")}
-                                        key={"pagi" + (+data.page + i - 5)}
-                                    >
-                                        <Link
-                                            className="page-link"
-                                            to={`?page=${data.page + i - 5}`}
-                                        >
-                                            {data.page + i - 5}
-                                        </Link>
-                                    </li>
-                                ) : null
-                            )}
-
-                        <li className="page-item">
-                            <a className="page-link" href="#/">
-                                Next
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+              <Pagination page={data.page} totalPages={data.totalPages} />
             ) : null}
 
             {console.log({ data })}
