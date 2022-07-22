@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { LOGIN_API } from "./../config/ajax-path";
+import ThemeContext from "./ThemeContext";
 
 export default function LoginForm() {
     const [myform, setMyform] = useState({
         account: "",
         password: "",
     });
+    const themeContext = useContext(ThemeContext)
 
     const changeFields = (event) => {
         const id = event.target.id;
@@ -40,7 +42,10 @@ export default function LoginForm() {
     };
 
     return (
-        <div className="container">
+        <div className="container" style={{
+            backgroundColor: themeContext.bgc,
+            color: themeContext.fc,
+        }}>
             <div className="row">
                 <div className="col-lg-6">
                     <form name="form1" onSubmit={whenSubmit}>
