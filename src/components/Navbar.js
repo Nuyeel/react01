@@ -34,6 +34,11 @@ export default function Navbar() {
                                 Home
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/list-auth">
+                                List-auth
+                            </Link>
+                        </li>
 
                         {Object.keys(themes).map((n) => {
                             return (
@@ -51,7 +56,7 @@ export default function Navbar() {
 
                     <ul className="navbar-nav mb-2 mb-lg-0">
                         {authorized ? (<>
-                            <li className="nav-item">{account}</li>
+                            <li className="nav-item nav-link">{account}</li>
                             <li className="nav-item">
                                 <button className="btn btn-warning"  onClick={()=>logout()}>
                                     登出
