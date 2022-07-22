@@ -6,20 +6,21 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LoginForm from "./components/LoginForm";
-import ThemeContext, {themes} from "./components/ThemeContext";
+
+import Container from "./Container";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <ThemeContext.Provider value={themes.dark}>
+        <Container>
+            <BrowserRouter>
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<App />} />
                     <Route path="/login" element={<LoginForm />} />
                 </Routes>
-            </ThemeContext.Provider>
-        </BrowserRouter>
+            </BrowserRouter>
+        </Container>
     </React.StrictMode>
 );
 
