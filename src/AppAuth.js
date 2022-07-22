@@ -21,7 +21,11 @@ export default function AppAuth() {
         }
         console.log({ gotoPage });
 
-        const r = await fetch(`${AB_GET_LIST_AUTH}?page=${gotoPage}`);
+        const r = await fetch(`${AB_GET_LIST_AUTH}?page=${gotoPage}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         const obj = await r.json();
         console.log(obj);
         setData(obj);
