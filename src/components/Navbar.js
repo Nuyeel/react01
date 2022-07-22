@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import ThemeContext, { themes } from "./ThemeContext";
+import AuthContext from "./AuthContext";
 
 export default function Navbar() {
     const { name, bgc, fc, setTheme } = useContext(ThemeContext);
+    const { authorized, account } = useContext(AuthContext);
 
     return (
         <nav className="navbar navbar-expand-lg bg-light">
@@ -32,11 +34,7 @@ export default function Navbar() {
                                 Home
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">
-                                login
-                            </Link>
-                        </li>
+
                         {Object.keys(themes).map((n) => {
                             return (
                                 <li className="nav-item" key={n}>
@@ -44,11 +42,23 @@ export default function Navbar() {
                                         className="btn"
                                         onClick={() => setTheme(themes[n])}
                                     >
-                                        {n + ((n===name) ? ' v' : '')}
+                                        {n + (n === name ? " v" : "")}
                                     </button>
                                 </li>
                             );
                         })}
+                    </ul>
+
+                    <ul className="navbar-nav mb-2 mb-lg-0">
+                        {authorized ? (
+                            <li className="nav-item">{account}</li>
+                        ) : (
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/login">
+                                    登入
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>

@@ -21,7 +21,7 @@ export default function AuthContextProvider({ children }) {
     const [auth, setAuth] = useState(localAuth);
 
     return (
-        <AuthContext.Provider value={{ auth, setAuth }}>
+        <AuthContext.Provider value={{ ...auth, setAuth }}>
             {children}
         </AuthContext.Provider>
     );
