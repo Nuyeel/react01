@@ -5,7 +5,7 @@ import AuthContext from "./AuthContext";
 
 export default function Navbar() {
     const { name, bgc, fc, setTheme } = useContext(ThemeContext);
-    const { authorized, account } = useContext(AuthContext);
+    const { authorized, account, logout } = useContext(AuthContext);
 
     return (
         <nav className="navbar navbar-expand-lg bg-light">
@@ -50,8 +50,14 @@ export default function Navbar() {
                     </ul>
 
                     <ul className="navbar-nav mb-2 mb-lg-0">
-                        {authorized ? (
+                        {authorized ? (<>
                             <li className="nav-item">{account}</li>
+                            <li className="nav-item">
+                                <button className="btn btn-warning"  onClick={()=>logout()}>
+                                    登出
+                                </button>
+                            </li>
+                            </>
                         ) : (
                             <li className="nav-item">
                                 <Link className="nav-link" to="/login">
