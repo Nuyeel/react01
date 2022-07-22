@@ -39,7 +39,7 @@ export default function Navbar() {
                         </li>
                         {Object.keys(themes).map((n) => {
                             return (
-                                <li className="nav-item">
+                                <li className="nav-item" key={n}>
                                     <button
                                         className="btn"
                                         onClick={() => setTheme(themes[n])}
