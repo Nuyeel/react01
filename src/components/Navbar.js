@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ThemeContext, { themes } from "./ThemeContext";
 
 export default function Navbar() {
-    const {name, bgc, fc, setTheme} = useContext(ThemeContext)
+    const { name, bgc, fc, setTheme } = useContext(ThemeContext);
 
     return (
         <nav className="navbar navbar-expand-lg bg-light">
@@ -40,7 +40,12 @@ export default function Navbar() {
                         {Object.keys(themes).map((n) => {
                             return (
                                 <li className="nav-item">
-                                    <button className="btn" onClick={()=>setTheme(themes[n])}>{n}</button>
+                                    <button
+                                        className="btn"
+                                        onClick={() => setTheme(themes[n])}
+                                    >
+                                        {n + ((n===name) ? ' v' : '')}
+                                    </button>
                                 </li>
                             );
                         })}

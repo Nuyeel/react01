@@ -1,12 +1,10 @@
-import React, {useState} from "react";
-import ThemeContext, { themes } from "./components/ThemeContext";
+import React from "react";
+import ThemeContextProvider from "./components/ThemeContextProvider";
 
 export default function Container({ children }) {
-    const [theme, setTheme] = useState(themes.blue)
-
     return (
-        <ThemeContext.Provider value={{...theme, setTheme}}>
+        <ThemeContextProvider>
             {children}
-        </ThemeContext.Provider>
+        </ThemeContextProvider>
     );
 }
