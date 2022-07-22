@@ -39,6 +39,11 @@ export default function Navbar() {
                                 List-auth
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/my-draw">
+                                My-draw
+                            </Link>
+                        </li>
 
                         {Object.keys(themes).map((n) => {
                             return (
